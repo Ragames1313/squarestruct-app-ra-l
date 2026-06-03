@@ -11,6 +11,7 @@ import pedidosRouter from './routes/pedidos.js';
 import perfilRouter from './routes/perfil.js';
 import productosRouter from './routes/productos.js';
 import usuariosRouter from './routes/usuarios.js';
+import resenaRouter from './routes/resena.js';
 
 // dotenv carga `backend/.env` y deja las variables disponibles en `process.env`.
 // Este paso también sirve como respaldo si este archivo se importa desde otro contexto
@@ -79,6 +80,7 @@ app.get('/api/db-status', async (req, res) => {
     const [[productos]] = await db.query('SELECT COUNT(*) AS total FROM productos');
     const [[pedidos]] = await db.query('SELECT COUNT(*) AS total FROM pedidos');
     const [[pedidoDetalles]] = await db.query('SELECT COUNT(*) AS total FROM pedidoDetalles');
+    const [[resenas]] = await db.query('SELECT COUNT(*) AS total FROM resenas');
 
     res.status(200).json({
       ok: true,
@@ -89,7 +91,8 @@ app.get('/api/db-status', async (req, res) => {
         proveedores: proveedores.total,
         productos: productos.total,
         pedidos: pedidos.total,
-        pedidoDetalles: pedidoDetalles.total
+        pedidoDetalles: pedidoDetalles.total,
+        resenas: resenas.total
       }
     });
   } catch (error) {
@@ -106,5 +109,8 @@ app.use('/api/productos', productosRouter);
 
 // Rutas de usuarios
 app.use('/api/usuarios', usuariosRouter);
+  
+// Rutas de reseñas
+app.use('/api/resenas', resenaRouter);
 
 export default app;

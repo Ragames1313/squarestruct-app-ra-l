@@ -37,6 +37,8 @@ const getCatalogProductImage = (product) => {
   return bloqueHormigonImage
 }
 
+
+
 function CatalogProductCard({ product, onAddProduct }) {
   const { t } = useTranslation()
   const tipo = getCatalogTypeLabel(product.tipo, t)

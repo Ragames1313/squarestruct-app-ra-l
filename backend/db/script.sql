@@ -36,6 +36,7 @@ DROP TABLE IF EXISTS planos;
 DROP TABLE IF EXISTS productos;
 DROP TABLE IF EXISTS proveedores;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS resenas;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -190,6 +191,21 @@ CREATE TABLE pedidoDetalles (
 
     CONSTRAINT chkPedidoDetallesPrecio CHECK (
         precioUnitario >= 0
+    )
+) ENGINE=InnoDB;
+
+CREATE TABLE resenas (
+    idResena INT AUTO_INCREMENT,
+    puntuacion INT NOT NULL,
+    comentario TEXT,
+    fechaResena TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    idUsuario INT NOT NULL,
+    idProducto INT NOT NULL,
+
+    CONSTRAINT pkResenas PRIMARY KEY (idResena),
+
+    CONSTRAINT chkResenasPuntuacion CHECK (
+        puntuacion >= 1 AND puntuacion <= 5
     )
 ) ENGINE=InnoDB;
 
