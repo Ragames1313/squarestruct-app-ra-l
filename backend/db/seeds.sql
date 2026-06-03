@@ -186,3 +186,9 @@ INSERT INTO planos (
 );
 
 */
+
+--reseñas
+INSERT INTO resenas (idResena, idProducto, idUsuario, calificacion, comentario, fecha)
+VALUES
+  (1, 1, 2, 5, 'Excelente bloque, fácil de montar y muy resistente.', '2026-04-30 10:00:00'),
+  (2, 1, 3, 4, 'Buen producto pero un poco caro.', '2026-05-01 12:30:00');

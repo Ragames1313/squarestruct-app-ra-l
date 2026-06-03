@@ -96,6 +96,27 @@ CREATE TABLE pedidoDetalles (
     ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
+
+CREATE TABLE resenas (
+  idResena INT AUTO_INCREMENT PRIMARY KEY,
+  puntuacion INT NOT NULL,
+  comentario TEXT,
+  fechaResena TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  idUsuario INT NOT NULL,
+  idProducto INT NOT NULL,
+  CONSTRAINT chkResenaPuntuacion CHECK (puntuacion >= 1 AND puntuacion <= 5),
+  CONSTRAINT fkResenasUsuarios
+    FOREIGN KEY (idUsuario)
+    REFERENCES usuarios (idUsuario)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT fkResenasProductos
+    FOREIGN KEY (idProducto)
+    REFERENCES productos (idProducto)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
 -- Indices para optimizar las consultas que usan FOREIGN KEYS en WHERE o JOIN
 -- Mejora el rendimiento de busquedas como: productos por idProveedor, pedidos por idUsuario, etc.
 CREATE INDEX idxProductosIdProveedor ON productos (idProveedor);
